@@ -2,7 +2,13 @@ services:
   redis:
     image: 'redis:latest'
     ports:
-      - '6379'
+      - '6379:6379'
+    container_name: my-redis
+    restart: always
+    networks:
+      - 'redis-net'
+    command: ["redis-server", "--appendonly", "yes"]
+
   sqlserver:
     image: 'mcr.microsoft.com/mssql/server:latest'
     environment:
